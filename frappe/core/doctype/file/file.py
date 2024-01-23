@@ -7,6 +7,7 @@ import os
 import re
 import shutil
 import zipfile
+import uuid
 from urllib.parse import quote, unquote
 
 from PIL import Image, ImageFile, ImageOps
@@ -579,7 +580,7 @@ class File(Document):
 		if not ignore_existing_file_check:
 			duplicate_file = frappe.get_value(
 				"File",
-				{"content_hash": self.content_hash, "is_private": self.is_private},
+				{"content_hash": self.content_hash, "is_private": self.is_private, "file_name": self.file_name},
 				["file_url", "name"],
 				as_dict=True,
 			)
@@ -604,10 +605,14 @@ class File(Document):
 			return self.save_file_on_filesystem()
 
 	def save_file_on_filesystem(self):
+		file_name = self.file_name
+		split_file_name = file_name.split(".")
+		extension = split_file_name[split_file_name.size() - 1] if split_file_name.size() > 1 else ''
+		storage_file_name = uuid.uuid4().hex + "." + extension
 		if self.is_private:
-			self.file_url = f"/private/files/{self.file_name}"
+			self.file_url = f"/private/files/{storage_file_name}"
 		else:
-			self.file_url = f"/files/{self.file_name}"
+			self.file_url = f"/files/{storage_file_name}"
 
 		fpath = self.write_file()
 
