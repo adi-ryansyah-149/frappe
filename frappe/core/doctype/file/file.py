@@ -607,7 +607,7 @@ class File(Document):
 	def save_file_on_filesystem(self):
 		file_name = self.file_name
 		split_file_name = file_name.split(".")
-		extension = split_file_name[split_file_name.size() - 1] if split_file_name.size() > 1 else ''
+		extension = split_file_name[split_file_name.len() - 1] if split_file_name.len() > 1 else ''
 		storage_file_name = uuid.uuid4().hex + "." + extension
 		if self.is_private:
 			self.file_url = f"/private/files/{storage_file_name}"
