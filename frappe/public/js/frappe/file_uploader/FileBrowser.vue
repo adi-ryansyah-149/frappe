@@ -2,7 +2,11 @@
 	<div class="file-browser">
 		<div>
 			<a href="" class="text-muted text-medium" @click.prevent="$emit('hide-browser')">
+<<<<<<< Updated upstream
 				{{ __("← Back to upload files") }}
+=======
+				{{ __("← Kembali") }}
+>>>>>>> Stashed changes
 			</a>
 		</div>
 		<div class="file-browser-list">
