@@ -7,7 +7,7 @@ frappe.utils.datatable.get_translations = function () {
 		"Sort Descending": __("Sort Descending"),
 		"Reset sorting": __("Reset sorting"),
 		"Remove column": __("Remove column"),
-		"No Data": __("No Data"),
+		"No Data": "Belum ada data",
 		"{count} cells copied": {
 			1: __("{count} cell copied"),
 			default: __("{count} cells copied"),

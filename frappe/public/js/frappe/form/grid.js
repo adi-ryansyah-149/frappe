@@ -87,7 +87,7 @@ export default class Grid {
 						<div class="grid-buttons">
 							<button class="btn btn-xs btn-danger grid-remove-rows hidden"
 								data-action="delete_rows">
-								${__("Delete")}
+								${__("Hapus")}
 							</button>
 							<button class="btn btn-xs btn-danger grid-remove-all-rows hidden"
 								data-action="delete_all_rows">
@@ -98,7 +98,7 @@ export default class Grid {
 							</button>
 							<!-- hack to allow firefox include this in tabs -->
 							<button class="btn btn-xs btn-secondary grid-add-row">
-								${__("Add Row")}
+								${__("Tambah Baru")}
 							</button>
 						</div>
 						<div class="grid-pagination">

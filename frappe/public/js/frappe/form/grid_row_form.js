@@ -48,15 +48,15 @@ export default class GridRowForm {
 							${frappe.utils.icon("down")}
 						</button>
 						<button class="btn btn-secondary btn-sm pull-right grid-move-row hidden-xs">
-							${__("Move")}</button>
+							${__("Pindahkan")}</button>
 						<button class="btn btn-secondary btn-sm pull-right grid-duplicate-row hidden-xs">
 							${frappe.utils.icon("duplicate")}
-							${__("Duplicate")}
+							${__("Duplikasi")}
 						</button>
 						<button class="btn btn-secondary btn-sm pull-right grid-insert-row hidden-xs">
-							${__("Insert Above")}</button>
+							${__("Tambah row di atas")}</button>
 						<button class="btn btn-secondary btn-sm pull-right grid-insert-row-below hidden-xs">
-							${__("Insert Below")}</button>
+							${__("Tambah row di bawah")}</button>
 						<button class="btn btn-danger btn-sm pull-right grid-delete-row">
 							${frappe.utils.icon("delete")}
 						</button>
@@ -66,11 +66,6 @@ export default class GridRowForm {
 			<div class="grid-form-body">
 				<div class="form-area"></div>
 				<div class="grid-footer-toolbar hidden-xs flex justify-between">
-					<div class="grid-shortcuts">
-						<span> ${frappe.utils.icon("keyboard", "md")} </span>
-						<span class="text-medium"> ${__("Shortcuts")}: </span>
-						<kbd>${__("Ctrl + Up")}</kbd> . <kbd>${__("Ctrl + Down")}</kbd> . <kbd>${__("ESC")}</kbd>
-					</div>
 					<button class="btn btn-secondary btn-sm pull-right grid-append-row">
 						${__("Insert Below")}
 					</button>

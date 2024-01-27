@@ -1,7 +1,7 @@
 <template>
 	<div class="file-web-link margin-bottom">
 		<a href class="text-muted text-medium" @click.prevent="$emit('hide-web-link')">
-			{{ __("← Back to upload files") }}
+			{{ __("← Kembali") }}
 		</a>
 		<div class="input-group">
 			<input

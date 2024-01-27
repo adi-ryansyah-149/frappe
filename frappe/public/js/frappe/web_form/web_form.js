@@ -89,11 +89,11 @@ export default class WebForm extends frappe.ui.FieldGroup {
 		}
 
 		this.$next_button = $(`<button class="btn btn-default btn-next btn-sm ml-2">
-			${__("Next")}
+			${__("Lanjut")}
 		</button>`);
 
 		this.$previous_button = $(`<button class="btn btn-default btn-previous btn-sm">
-			${__("Previous")}
+			${__("Sebelumnya")}
 		</button>`);
 
 		this.$next_button.insertAfter(".web-form-footer .right-area .discard-btn");

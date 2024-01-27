@@ -97,7 +97,7 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 			<div>
 				<img src="/assets/frappe/images/ui-states/list-empty-state.svg" alt="Generic Empty State" class="null-state">
 			</div>
-			<p>${__("Nothing to show")}</p>
+			<p>Belum ada data</p>
 		</div>`;
 	}
 

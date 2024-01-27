@@ -349,7 +349,7 @@ frappe.views.BaseList = class BaseList {
 	}
 
 	get_no_result_message() {
-		return __("Nothing to show");
+		return __("Belum ada data");
 	}
 
 	setup_paging_area() {

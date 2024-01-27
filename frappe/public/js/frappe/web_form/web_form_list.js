@@ -226,7 +226,7 @@ export default class WebFormList {
 			<a
 				class="btn btn-primary btn-sm btn-new-doc hidden-xs"
 				href="${location.pathname.replace("/list", "")}/new">
-				${__("Create a new {0}", [__(this.doctype)])}
+				Buat baru
 			</a>
 		`;
 
@@ -239,7 +239,7 @@ export default class WebFormList {
 							alt="Generic Empty State"
 							class="null-state">
 					</div>
-					<p class="small mb-2">${__("No {0} found", [__(this.doctype)])}</p>
+					<p class="small mb-2">Belum ada data</p>
 					${new_button}
 				</div>
 			</div>
