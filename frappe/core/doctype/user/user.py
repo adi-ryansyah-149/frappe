@@ -869,7 +869,7 @@ def sign_up(email, full_name, redirect_to):
 
 	user = frappe.db.get("User", {"email": email})
 
-	if user.last_password_reset_date is None and user.last_login is None:
+	if user and user.last_password_reset_date is None and user.last_login is None:
 		user.delete()
 		user = None
 
