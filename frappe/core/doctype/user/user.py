@@ -868,6 +868,11 @@ def sign_up(email, full_name, redirect_to):
 		frappe.throw(_("Sign Up is disabled"), title=_("Not Allowed"))
 
 	user = frappe.db.get("User", {"email": email})
+
+	if user.last_password_reset_date is None and user.last_login is None:
+		user.delete()
+		user = None
+
 	if user:
 		if user.enabled:
 			return 0, _("Already Registered")
