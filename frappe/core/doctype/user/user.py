@@ -870,8 +870,18 @@ def sign_up(email, full_name, redirect_to):
 	user = frappe.db.get("User", {"email": email})
 
 	if user and user.last_password_reset_date is None and user.last_login is None:
-		user.delete()
-		user = None
+		reset_password_link_expiry = cint(
+				frappe.db.get_single_value("System Settings", "reset_password_link_expiry_duration")
+		)
+
+		if (
+			reset_password_link_expiry
+			and now_datetime() > user.last_reset_password_key_generated_on + timedelta(seconds=reset_password_link_expiry)
+		):
+			user.delete()
+			user = None
+		else:
+			frappe.throw(f"Harap tunggu {reset_password_link_expiry / 60} menit.")
 
 	if user:
 		if user.enabled:
