@@ -863,6 +863,7 @@ def verify_password(password):
 
 
 @frappe.whitelist(allow_guest=True)
+@rate_limit(limit=get_password_reset_limit, seconds=24 * 60 * 60)
 def sign_up(email, full_name, redirect_to):
 	if is_signup_disabled():
 		frappe.throw(_("Sign Up is disabled"), title=_("Not Allowed"))
@@ -878,7 +879,7 @@ def sign_up(email, full_name, redirect_to):
 			reset_password_link_expiry
 			and now_datetime() > user.last_reset_password_key_generated_on + timedelta(seconds=reset_password_link_expiry)
 		):
-			user.delete()
+			frappe.delete_doc('User', user.name)
 			user = None
 		else:
 			frappe.throw(f"Harap tunggu {reset_password_link_expiry / 60} menit.")
