@@ -10,6 +10,7 @@ dist/
 # build/
 frappe/docs/current
 frappe/public/dist
+frappe/core/workspace
 .vscode
 .vs
 node_modules
