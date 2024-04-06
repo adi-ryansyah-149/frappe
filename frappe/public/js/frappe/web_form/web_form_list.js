@@ -265,7 +265,7 @@ export default class WebFormList {
 				columns: this.columns,
 				serial_number: this.rows.length + 1,
 				events: {
-					on_edit: () => this.open_form(data_item.name),
+					on_edit: () => this.open_form(data_item),
 					on_select: () => {
 						this.toggle_new();
 						this.toggle_delete();
@@ -313,13 +313,18 @@ export default class WebFormList {
 		this.rows.forEach((row) => row.toggle_select(checked));
 	}
 
-	open_form(name) {
+	open_form(data_item) {
+		const name = data_item.name
 		let path = window.location.pathname;
 		if (path.includes("/list")) {
 			path = path.replace("/list", "");
 		}
 
-		window.location.href = path + "/" + name + "/edit";
+		let page_path = path + "/" + name;
+		if (data_item.docstatus == 0) {
+			page_path += "/edit"
+		}
+		window.location.href = page_path;
 	}
 
 	get_selected() {
