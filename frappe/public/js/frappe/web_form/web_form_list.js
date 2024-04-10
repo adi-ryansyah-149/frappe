@@ -172,13 +172,20 @@ export default class WebFormList {
 	}
 
 	make_table_head() {
+		// let $thead = $(`
+		// 	<thead>
+		// 		<tr>
+		// 			<th>
+		// 				<input type="checkbox" class="select-all">
+		// 			</th>
+		// 			<th>${__("Sr")}.</th>
+		// 		</tr>
+		// 	</thead>
+		// `);
+
 		let $thead = $(`
 			<thead>
 				<tr>
-					<th>
-						<input type="checkbox" class="select-all">
-					</th>
-					<th>${__("Sr")}.</th>
 				</tr>
 			</thead>
 		`);
@@ -193,6 +200,10 @@ export default class WebFormList {
 			let $th = $(`<th>${__(col.label)}</th>`);
 			$th.appendTo($tr);
 		});
+
+		let $tr = $thead.find("tr");
+		let $action = $(`<th>Aksi</th>`);
+		$action.appendTo($tr);
 
 		$thead.appendTo(this.table);
 	}
@@ -266,6 +277,7 @@ export default class WebFormList {
 				serial_number: this.rows.length + 1,
 				events: {
 					on_edit: () => this.open_form(data_item),
+					on_revise: () => this.open_revision_form(data_item),
 					on_select: () => {
 						this.toggle_new();
 						this.toggle_delete();
@@ -327,6 +339,24 @@ export default class WebFormList {
 		window.location.href = page_path;
 	}
 
+	open_revision_form(data_item) {
+		const name = data_item.name
+		let path = window.location.pathname;
+		if (path.includes("/list")) {
+			path = path.replace("/list", "");
+		}
+
+		if (path.includes("/" + data_item.name)) {
+			path = path.replace("/" + data_item.name, "");
+		}
+
+		let page_path = path;
+		if (data_item.docstatus == 1) {
+			page_path += "/new?revise_from=" + name;
+		}
+		window.location.href = page_path;
+	}
+
 	get_selected() {
 		return this.rows.filter((row) => row.is_selected());
 	}
@@ -370,19 +400,20 @@ frappe.ui.WebFormListRow = class WebFormListRow {
 
 	make_row() {
 		// Add Checkboxes
-		let $cell = $(`<td class="list-col-checkbox"></td>`);
+		// let $cell = $(`<td class="list-col-checkbox"></td>`);
+		// let $cell = $(`<td class="list-col-checkbox"></td>`);
 
-		this.checkbox = $(`<input type="checkbox">`);
-		this.checkbox.on("click", (event) => {
-			this.toggle_select(event.target.checked);
-			event.stopImmediatePropagation();
-		});
-		this.checkbox.appendTo($cell);
-		$cell.appendTo(this.row);
+		// this.checkbox = $(`<input type="checkbox">`);
+		// this.checkbox.on("click", (event) => {
+		// 	this.toggle_select(event.target.checked);
+		// 	event.stopImmediatePropagation();
+		// });
+		// this.checkbox.appendTo($cell);
+		// $cell.appendTo(this.row);
 
 		// Add Serial Number
-		let serialNo = $(`<td class="list-col-serial">${__(this.serial_number)}</td>`);
-		serialNo.appendTo(this.row);
+		// let serialNo = $(`<td class="list-col-serial">${__(this.serial_number)}</td>`);
+		// serialNo.appendTo(this.row);
 
 		this.columns.forEach((field) => {
 			let formatter = frappe.form.get_formatter(field.fieldtype);
@@ -400,7 +431,23 @@ frappe.ui.WebFormListRow = class WebFormListRow {
 			cell.appendTo(this.row);
 		});
 
-		this.row.on("click", () => this.events.on_edit());
+		let edit_label = this.doc['docstatus'] == 1? 'View' : 'Edit';
+		const edit_button = $(`<a onclick='() =>this.events.on_edit()' style='color:#2490ef'>${__(edit_label)}</a>`);
+		edit_button.on("click", () => this.events.on_edit());		
+
+		const revise_button = $(`<a onclick='() =>this.events.on_edit()' style='color:#2490ef'>${__("Perbaiki")}</a>`);
+		revise_button.on("click", () => this.events.on_revise());		
+			
+		const action_cell = $("<td></td>");
+		action_cell.append(edit_button);
+
+		if (this.doc['docstatus'] == 1 && this.doc['status'] && this.doc['status'] == 'Rejected') {
+			action_cell.append(" | ");
+			action_cell.append(revise_button);
+		}
+		action_cell.appendTo(this.row);
+
+		// this.row.on("click", () => this.events.on_edit());
 	}
 
 	toggle_select(checked) {

@@ -2671,8 +2671,8 @@ User permissions should not apply for this Link,Akses user harus tidak berlaku u
 User {0} cannot be deleted,Pengguna {0} tidak dapat dihapus,
 User {0} cannot be disabled,Pengguna {0} tidak dapat dinonaktifkan,
 User {0} cannot be renamed,Pengguna {0} tidak dapat diganti,
-User {0} does not have access to this document,Pengguna {0} tidak memiliki akses ke dokumen ini,
-User {0} does not have doctype access via role permission for document {1},Pengguna {0} tidak memiliki akses doctype melalui izin peran untuk dokumen {1},
+User {0} does not have access to this document,User {0} tidak memiliki akses ke dokumen ini,
+User {0} does not have doctype access via role permission for document {1},User '{0}' tidak memiliki akses untuk dokumen ini
 Username,Nama pengguna,
 Username {0} already exists,Nama pengguna {0} sudah ada,
 Users with role {0}:,Pengguna dengan peran {0}:,
@@ -4703,3 +4703,5 @@ Message from server: {0},Pesan dari server: {0},
 Error: Value missing for {0}: {1},Wajib diisi: {1}
 Drag and drop files here or upload from,Klik dan tarik file ke sini
 My Device,Dari Komputer
+View,Tampilkan
+Revise,Perbaiki
